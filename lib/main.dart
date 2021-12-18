@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:weather_app/src/data/sotrage/localization.dart';
-import 'package:weather_app/src/data/sotrage/theme.dart';
+import 'src/data/storage/localization.dart';
+import 'src/data/storage/theme.dart';
 
 import 'app.dart';
 

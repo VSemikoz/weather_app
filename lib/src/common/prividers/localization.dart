@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../generated/l10n.dart';
-import '../../data/sotrage/localization.dart';
+import '../../data/storage/localization.dart';
 import '../../data/models/localization.dart';
 
 class LocalizationProvider with ChangeNotifier, DiagnosticableTreeMixin {

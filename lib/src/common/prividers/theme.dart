@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/theme.dart';
-import '../../data/sotrage/theme.dart';
+import '../../data/storage/theme.dart';
 import '../resource/colors.dart';
 
 class BaseAppTheme {
