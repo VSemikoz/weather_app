@@ -5,15 +5,20 @@ import 'package:provider/provider.dart';
 import '../../data/models/theme.dart';
 import '../../data/storage/theme.dart';
 import '../resource/colors.dart';
+import '../resource/theme/text.dart';
 
 class BaseAppTheme {
   BaseAppTheme({
+    required AppTextThemeData Function(AppBaseColors colorTheme) createTextTheme,
     required AppBaseColors Function() createColorTheme,
   }) {
     _color = createColorTheme();
+    _text = createTextTheme(_color);
   }
 
-// late AppTextThemeData _text;
+  late AppTextThemeData _text;
+
+  AppTextThemeData get text => _text;
 
   late AppBaseColors _color;
 
@@ -34,11 +39,32 @@ class BaseAppTheme {
 
   static BaseAppTheme get lightTheme => BaseAppTheme(
         createColorTheme: AppBaseColors.getLightColorTheme,
+        createTextTheme: _getDefaultTextTheme,
       );
 
   static BaseAppTheme get darkTheme => BaseAppTheme(
         createColorTheme: AppBaseColors.getDarkColorTheme,
+        createTextTheme: _getDefaultTextTheme,
       );
+}
+
+AppTextThemeData _getDefaultTextTheme(AppBaseColors color) {
+  return AppTextThemeData(
+    listTitleHeader1: TextStyle(
+      color: color.onBackground,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+    textButtonLabel: TextStyle(
+      color: color.accent,
+      fontSize: 14,
+    ),
+    titleAppBar: TextStyle(
+      color: color.onPrimary,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ),
+  );
 }
 
 extension BuildContextExtension on BuildContext {
