@@ -59,16 +59,6 @@ class S {
       args: [],
     );
   }
-
-  /// `appBar`
-  String get appBar1 {
-    return Intl.message(
-      'appBar',
-      name: 'appBar1',
-      desc: '',
-      args: [],
-    );
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
