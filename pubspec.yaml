@@ -1,0 +1,60 @@
+name: weather_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.4
+  dio_cache_interceptor: ^3.0.3
+  pretty_dio_logger: ^1.1.1
+
+  # Architecture
+  provider: ^6.0.1
+  flutter_bloc: ^8.0.0
+  injectable: ^1.5.0
+  get_it: ^7.2.0
+
+  # Network
+  dio: ^4.0.4
+  connectivity: ^3.0.6
+
+  # Data
+  hive: ^2.0.5
+  hive_generator: ^1.1.1
+  hive_flutter: ^1.1.0
+  moor_flutter: ^4.0.0
+
+  # Utils
+  logger: ^1.1.0
+  async: ^2.8.2
+  intl: ^0.17.0
+  equatable: ^2.0.3
+  duration: ^3.0.8
+  tuple: ^2.0.0
+  rxdart: ^0.27.3
+  mask_text_input_formatter: ^2.0.0
+  quiver: ^3.0.1+1
+  collection: ^1.15.0
+  injectable_generator: ^1.5.2
+  build_runner: ^2.1.7
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+flutter_intl:
+  enabled: true
