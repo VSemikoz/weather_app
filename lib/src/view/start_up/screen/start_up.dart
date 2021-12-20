@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/src/view/start_up/bloc/bloc.dart';
-import 'package:weather_app/src/view/start_up/bloc/event.dart';
-import 'package:weather_app/src/view/start_up/bloc/state.dart';
+
+import '../bloc/start_up.dart';
 
 enum PageState { first, second, third }
 

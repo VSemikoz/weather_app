@@ -5,14 +5,14 @@ import 'state.dart';
 
 class StartUpBloc extends Bloc<StartUpEvent, StartUpState> {
   StartUpBloc() : super(StartUpState.first()) {
-    on<StartUpEventToFirst>((event, emit) => toFirst(emit));
-    on<StartUpEventToSecond>((event, emit) => toSecond(emit));
-    on<StartUpEventtoThird>((event, emit) => toThird(emit));
+    on<StartUpEventToFirst>((event, emit) => toFirst(event, emit));
+    on<StartUpEventToSecond>((event, emit) => toSecond(event, emit));
+    on<StartUpEventtoThird>((event, emit) => toThird(event, emit));
   }
 
-  toSecond(Emitter<StartUpState> emit) => emit(StartUpState.second());
+  toFirst(StartUpEventToFirst event, Emitter<StartUpState> emit) => emit(StartUpState.first());
 
-  toThird(Emitter<StartUpState> emit) => emit(StartUpState.third());
+  toSecond(StartUpEventToSecond event, Emitter<StartUpState> emit) => emit(StartUpState.second());
 
-  toFirst(Emitter<StartUpState> emit) => emit(StartUpState.first());
+  toThird(StartUpEventtoThird event, Emitter<StartUpState> emit) => emit(StartUpState.third());
 }

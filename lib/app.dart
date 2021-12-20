@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/src/common/prividers/theme.dart';
 
 import 'generated/l10n.dart';
-import 'src/common/prividers/localization.dart';
+import 'src/common/providers/localization.dart';
+import 'src/common/providers/theme.dart';
 import 'src/view/start_up/bloc/bloc.dart';
 import 'src/view/start_up/screen/start_up.dart';
 
