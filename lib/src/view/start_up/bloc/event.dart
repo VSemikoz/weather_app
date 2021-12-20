@@ -6,5 +6,6 @@ part 'event.freezed.dart';
 abstract class StartUpEvent with _$StartUpEvent {
   const factory StartUpEvent.toFirst() = StartUpEventToFirst;
   const factory StartUpEvent.toSecond() = StartUpEventToSecond;
-  const factory StartUpEvent.toThird() = StartUpEventtoThird;
+  const factory StartUpEvent.toThird() = StartUpEventToThird;
+  const factory StartUpEvent.requestLocation() = StartUpEventToRequestLocation;
 }
