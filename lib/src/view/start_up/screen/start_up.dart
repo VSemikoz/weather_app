@@ -11,6 +11,8 @@ const double _dotSize = 10;
 const Duration _pageTransitionDuration = Duration(milliseconds: 1000);
 
 class StartUpScreen extends StatelessWidget {
+  static const String id = '/start_up';
+
   const StartUpScreen({Key? key}) : super(key: key);
 
   @override
