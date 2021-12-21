@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'event.dart';
 import 'state.dart';
 
+@Injectable()
 class StartUpBloc extends Bloc<StartUpEvent, StartUpState> {
   StartUpBloc() : super(StartUpState.first()) {
     on<StartUpEventToFirst>((event, emit) => toFirst(event, emit));
