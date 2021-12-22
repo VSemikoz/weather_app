@@ -6,13 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/src/common/logger/logger.dart';
 
 import 'router/router.dart';
+import 'package:collection/collection.dart';
 
 class AppRouterDelegate extends RouterDelegate<RouteInfo>
     with PopNavigatorRouterDelegateMixin<RouteInfo>, ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RouterBloc, List<RouteInfo>>(
-      buildWhen: (previous, current) => previous != current,
+      buildWhen: (previous, current) => ListEquality().equals(previous, current),
       builder: (context, stack) {
         if (stack.isEmpty) return Container();
 

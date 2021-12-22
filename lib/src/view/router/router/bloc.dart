@@ -18,5 +18,5 @@ class RouterBloc extends Bloc<RouterEvent, List<RouteInfo>> {
 
   onPop(OnPop event, Emitter<List<RouteInfo>> emit) => emit(stack..removeLast());
 
-  toMain(ToMain event, Emitter<List<RouteInfo>> emit) => emit([ScreenProvider.main()]);
+  toMain(ToMain event, Emitter<List<RouteInfo>> emit) => emit(stack..add(ScreenProvider.main()));
 }
