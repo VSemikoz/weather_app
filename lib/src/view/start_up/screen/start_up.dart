@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../generated/l10n.dart';
+import '../../../common/providers/theme.dart';
+import '../../../ui/widget/button/primary.dart';
 import '../bloc/start_up.dart';
 
 const _authRadius = Radius.circular(50.0);
 const _dotRadius = Radius.circular(10.0);
 const _dotPadding = const EdgeInsets.all(8.0);
 const double _dotSize = 10;
+const double _iconSize = 40;
+const double _iconContainerSize = 60;
 
-const Duration _pageTransitionDuration = Duration(milliseconds: 1000);
+const TextStyle _descStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.w700);
+
+const Duration _pageTransitionDuration = Duration(milliseconds: 200);
 
 class StartUpScreen extends StatelessWidget {
   static const String id = '/start_up';
@@ -17,7 +24,13 @@ class StartUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: TransitionPage());
+    return Scaffold(
+      body: SafeArea(
+        bottom: true,
+        top: false,
+        child: TransitionPage(),
+      ),
+    );
   }
 }
 
@@ -35,14 +48,6 @@ class _TransitionPageState extends State<TransitionPage> {
   void initState() {
     controller = PageController(initialPage: 0);
     return super.initState();
-  }
-
-  _switchScene(BuildContext context, StartUpState state) {
-    state.when(
-      first: () => context.read<StartUpBloc>().add(StartUpEventToSecond()),
-      second: () => context.read<StartUpBloc>().add(StartUpEventToRequestLocation()),
-      third: () => context.read<StartUpBloc>().add(StartUpEventToFirst()),
-    );
   }
 
   @override
@@ -63,15 +68,8 @@ class _TransitionPageState extends State<TransitionPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
-                  onPressed: () => _switchScene(context, state),
-                  child: Container(
-                    color: Colors.white,
-                    width: 200,
-                    height: 20,
-                    child: Center(child: Text("next")),
-                  ),
-                ),
+                _NextButton(state: state),
+                const SizedBox(height: 20),
                 _Switcher(state: state),
               ],
             ),
@@ -90,6 +88,62 @@ class _TransitionPageState extends State<TransitionPage> {
 
   _animateToPage(int pageIndex) =>
       controller.animateToPage(pageIndex, duration: _pageTransitionDuration, curve: Curves.linear);
+}
+
+class _NextButton extends StatelessWidget {
+  final StartUpState state;
+
+  const _NextButton({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  _switchScene(BuildContext context, StartUpState state) {
+    state.when(
+      first: () => context.read<StartUpBloc>().add(StartUpEventToSecond()),
+      second: () => context.read<StartUpBloc>().add(StartUpEventToRequestLocation()),
+      third: () => context.read<StartUpBloc>().add(StartUpEventToFirst()),
+    );
+  }
+
+  Color _getColor(BuildContext context) {
+    return state.when(
+      first: () => context.colorTheme.extraNegative,
+      second: () => context.colorTheme.extraPositive,
+      third: () => context.colorTheme.accent,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      height: 50,
+      child: TappableArea(
+        onPressed: () => _switchScene(context, state),
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              boxShadow: [
+                BoxShadow(
+                  color: _getColor(context),
+                  offset: Offset(0.0, 1.0),
+                  blurRadius: 6.0,
+                ),
+              ],
+            ),
+            child: Center(
+              child: Text(
+                S.of(context).screenStartUpButtonNext,
+                style: _descStyle.copyWith(color: context.colorTheme.surface),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _Switcher extends StatelessWidget {
@@ -128,7 +182,7 @@ class _SwitcherDot extends StatelessWidget {
         width: _dotSize,
         height: _dotSize,
         decoration: BoxDecoration(
-          color: isActive ? Colors.black : Colors.white, //TODO switch to pallet colors
+          color: isActive ? context.colorTheme.surface : context.colorTheme.background,
           borderRadius: BorderRadius.all(_dotRadius),
         ),
       ),
@@ -146,8 +200,27 @@ class _FirstPage extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            color: Colors.red,
-            child: Center(child: Text("Hello")),
+            color: context.colorTheme.extraActive,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  S.of(context).screenStartUpGreetingsTop,
+                  style: _descStyle.copyWith(color: context.colorTheme.surface),
+                ),
+                const SizedBox(height: 10),
+                Icon(
+                  Icons.wb_cloudy,
+                  color: context.colorTheme.surface,
+                  size: 70,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  S.of(context).screenStartUpGreetingsBottom,
+                  style: _descStyle.copyWith(color: context.colorTheme.surface),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -167,19 +240,29 @@ class _SecondPage extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            color: Colors.green,
+            color: Colors.lightGreen,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Get location"),
-                TextButton(
+                Text(
+                  S.of(context).screenStartUpLocationTop,
+                  style: _descStyle.copyWith(color: context.colorTheme.surface),
+                ),
+                const SizedBox(height: 10),
+                TappableArea(
+                  width: 70,
+                  height: 70,
                   onPressed: () => _requestLocation(context),
-                  child: Container(
-                    color: Colors.white,
-                    width: 200,
-                    height: 20,
-                    child: Center(child: Text("GET LOC")),
+                  child: Icon(
+                    Icons.location_on,
+                    color: context.colorTheme.surface,
+                    size: 70,
                   ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  S.of(context).screenStartUpLocationBottom,
+                  style: _descStyle.copyWith(color: context.colorTheme.surface),
                 ),
               ],
             ),
@@ -204,8 +287,17 @@ class _ThirdPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("AUTH"),
+                Text(
+                  S.of(context).screenStartUpAuthTop,
+                  style: _descStyle.copyWith(color: context.colorTheme.surface),
+                ),
+                const SizedBox(height: 10),
                 _AuthButtons(),
+                const SizedBox(height: 10),
+                Text(
+                  S.of(context).screenStartUpAuthBottom,
+                  style: _descStyle.copyWith(color: context.colorTheme.surface),
+                ),
               ],
             ),
           ),
@@ -234,19 +326,14 @@ class _WithGoogle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Container(
-        width: 30,
-        height: 30,
-        decoration: BoxDecoration(
-          color: Colors.white, //TODO switch to pallet colors
-          borderRadius: BorderRadius.all(_authRadius),
-        ),
-        child: Icon(Icons.login),
+    return Container(
+      width: _iconContainerSize,
+      height: _iconContainerSize,
+      decoration: BoxDecoration(
+        color: context.colorTheme.background,
+        borderRadius: BorderRadius.all(_authRadius),
       ),
-      onPressed: () {
-        //TODO add auth
-      },
+      child: Icon(Icons.login, size: _iconSize, color: context.colorTheme.surface),
     );
   }
 }
