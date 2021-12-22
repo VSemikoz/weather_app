@@ -1,3 +1,11 @@
 {
-  "appBar": "appBar"
+  "screenStartUpGreetingsTop": "Welcome to",
+  "screenStartUpGreetingsBottom": "weather tracking app",
+  "screenStartUpLocationTop": "To track your weather",
+  "screenStartUpLocationBottom": "we need to know your location",
+  "screenStartUpAuthTop": "To save data about",
+  "screenStartUpAuthBottom": "you need to login in",
+  "screenStartUpButtonNext": "Next"
+
+
 }

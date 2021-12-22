@@ -8,7 +8,6 @@ class AppBaseColors {
   final Color primary;
   final Color primaryDark;
   final Color accent;
-  final Color accentSecondary;
   final Color accentInactive;
   final Color background;
   final Color surface;
@@ -28,7 +27,6 @@ class AppBaseColors {
     required this.primary,
     required this.primaryDark,
     required this.accent,
-    required this.accentSecondary,
     required this.accentInactive,
     required this.background,
     required this.surface,
@@ -60,7 +58,6 @@ class AppBaseColors {
     warning: AppLightColors.warning,
     onWarning: AppLightColors.onWarning,
     onExtra: AppLightColors.onExtra,
-    accentSecondary: AppLightColors.accentSecondary,
     accentInactive: AppLightColors.accentInactive,
     onAccent: AppLightColors.onAccent,
     onAccentInactive: AppLightColors.onAccentInactive,
@@ -81,7 +78,6 @@ class AppBaseColors {
     warning: AppDarkColors.warning,
     onWarning: AppDarkColors.onWarning,
     onExtra: AppDarkColors.onExtra,
-    accentSecondary: AppDarkColors.accentSecondary,
     accentInactive: AppDarkColors.accentInactive,
     onAccent: AppDarkColors.onAccent,
     onAccentInactive: AppDarkColors.onAccentInactive,
