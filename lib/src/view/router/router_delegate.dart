@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/src/common/logger/logger.dart';
 
 import 'router/router.dart';
 
@@ -15,7 +16,9 @@ class AppRouterDelegate extends RouterDelegate<RouteInfo>
       builder: (context, stack) {
         if (stack.isEmpty) return Container();
 
+        Log().writer.log(stack);
         return Navigator(
+          key: navigatorKey,
           pages: stack.map((e) => WeatherAppPage(child: e.builder(context), id: e.id)).toList(),
           onPopPage: (route, result) {
             if (!route.didPop(result)) return false;

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/src/view/router/router/bloc.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../common/providers/theme.dart';
 import '../../../ui/widget/button/primary.dart';
+import '../../router/router/event.dart';
 import '../bloc/start_up.dart';
 
 const _authRadius = Radius.circular(50.0);
@@ -102,7 +104,7 @@ class _NextButton extends StatelessWidget {
     state.when(
       first: () => context.read<StartUpBloc>().add(StartUpEventToSecond()),
       second: () => context.read<StartUpBloc>().add(StartUpEventToRequestLocation()),
-      third: () => context.read<StartUpBloc>().add(StartUpEventToFirst()),
+      third: () => context.read<RouterBloc>().add(ToMain()),
     );
   }
 
