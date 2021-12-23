@@ -6,7 +6,7 @@ import 'router.dart';
 
 @Singleton()
 class RouterBloc extends Bloc<RouterEvent, List<RouteInfo>> {
-  RouterBloc() : super([ScreenProvider.startUp()]) {
+  RouterBloc() : super([ScreenProvider.main()]) {
     on<ToInit>((event, emit) => toInit(event, emit));
     on<OnPop>((event, emit) => onPop(event, emit));
     on<ToMain>((event, emit) => toMain(event, emit));

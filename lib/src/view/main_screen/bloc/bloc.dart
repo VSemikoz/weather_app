@@ -1,17 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:weather_app/src/common/logger/logger.dart';
-import 'package:weather_app/src/view/main_screen/bloc/event.dart';
-import 'package:weather_app/src/view/main_screen/bloc/state.dart';
+
+import '../../../common/logger/logger.dart';
+import '../../../domain/usecases/weather.dart';
+import 'main_screen.dart';
 
 @Injectable()
 class MainBloc extends Bloc<MainEvent, MainState> {
-  MainBloc() : super(MainState.loading()) {
+  final GetWeatherUseCase _getWeatherUseCase;
+
+  MainBloc(this._getWeatherUseCase) : super(MainState.loading()) {
     on<MainEventInit>((event, emit) => _init(event, emit));
   }
 
-  _init(MainEventInit event, Emitter<MainState> emit) {
-    Log().writer.log("MainBloc");
-
+  _init(MainEventInit event, Emitter<MainState> emit) async{
+    final a = await _getWeatherUseCase();
+    Log().writer.log(a.toString());
   }
 }

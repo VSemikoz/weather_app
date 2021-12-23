@@ -17,7 +17,6 @@ class AppRouterDelegate extends RouterDelegate<RouteInfo>
       builder: (context, stack) {
         if (stack.isEmpty) return Container();
 
-        Log().writer.log(stack);
         return Navigator(
           key: navigatorKey,
           pages: stack.map((e) => WeatherAppPage(child: e.builder(context), id: e.id)).toList(),
