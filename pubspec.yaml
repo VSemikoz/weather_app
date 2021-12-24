@@ -48,6 +48,7 @@ dependencies:
   build_runner: ^2.1.7
   freezed_annotation: ^1.1.0
   permission_handler: ^8.3.0
+  dartz: ^0.10.1
 
 
 dev_dependencies:
