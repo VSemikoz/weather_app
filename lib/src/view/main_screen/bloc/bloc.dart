@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../common/logger/logger.dart';
 import '../../../domain/usecases/weather.dart';
 import 'main_screen.dart';
 
@@ -13,8 +12,12 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<MainEventInit>((event, emit) => _init(event, emit));
   }
 
-  _init(MainEventInit event, Emitter<MainState> emit) async{
-    final a = await _getWeatherUseCase();
-    Log().writer.log(a.toString());
+  _init(MainEventInit event, Emitter<MainState> emit) async {
+    emit(MainState.loading());
+    final result = await _getWeatherUseCase();
+    result.fold(
+      (weatherData) => emit(MainState.success(weatherData)),
+      (exception) => emit(MainState.failure()),
+    );
   }
 }

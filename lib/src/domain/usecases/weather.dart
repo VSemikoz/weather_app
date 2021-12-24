@@ -1,9 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/repository/weather.dart';
+import '../models/weather.dart';
 
 abstract class GetWeatherUseCase {
-  Future call();
+  Future<Either<WeatherData, Exception>> call();
 }
 
 @Injectable(as: GetWeatherUseCase)
@@ -13,5 +15,5 @@ class GetWeatherUseCaseImpl extends GetWeatherUseCase {
   GetWeatherUseCaseImpl(this._repository);
 
   @override
-  Future call() => _repository.getWeather();
+  Future<Either<WeatherData, Exception>> call() => _repository.getWeather();
 }
