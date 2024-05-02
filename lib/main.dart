@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'src/data/storage/localization.dart';
-import 'src/data/storage/theme.dart';
 
 import 'app.dart';
+import 'src/common/injection/injection.dart';
+import 'src/common/logger/logger.dart';
+import 'src/data/storage/localization.dart';
+import 'src/data/storage/theme.dart';
 
 void main() => setupApp().then((value) => runApp(WeatherApp()));
 
@@ -17,9 +20,9 @@ Future<void> setupApp() async {
 
   _disableLandscape();
 
-  // Log().writer = kReleaseMode ? LogWriterProduction() : LogWriterDevelopment();
+  Log().writer = kReleaseMode ? LogWriterProduction() : LogWriterDevelopment();
 
-  // await configureInjection(Env.dev);
+  await configureInjection(Env.dev);
 }
 
 void _disableLandscape() =>
