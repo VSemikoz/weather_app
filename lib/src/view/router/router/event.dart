@@ -6,4 +6,5 @@ part 'event.freezed.dart';
 abstract class RouterEvent with _$RouterEvent {
   const factory RouterEvent.onPop() = OnPop;
   const factory RouterEvent.toInit() = ToInit;
+  const factory RouterEvent.toMain() = ToMain;
 }

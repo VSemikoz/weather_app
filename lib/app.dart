@@ -11,6 +11,8 @@ import 'src/view/router/router/bloc.dart';
 import 'src/view/router/router_delegate.dart';
 
 class WeatherApp extends StatelessWidget {
+  const WeatherApp();
+
   @override
   Widget build(BuildContext context) {
     return _AppMultiProvider(
